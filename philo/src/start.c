@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/10 13:13:53 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/12 15:26:34 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	birth_philos(t_data *data)
 
 int	start(t_data *data)
 {
-	if (birth_philos(data) != 0)	
+	pthread_create(&data->clock, NULL, &internal_clock, data);
+	if (birth_philos(data) != 0)
 		return (1);
 	return (0);
 }

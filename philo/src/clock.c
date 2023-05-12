@@ -6,44 +6,47 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/10 13:49:29 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/12 15:24:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	get_time(t_philo *philo)
+void	corrected_sleep(int	dur, t_data *data)
+{
+	int	start;
+	int	end;
+	int	cur;
+
+	start = get_time(data);
+	end = start + dur;
+	while (get_time(data) < end)
+	{
+		usleep(100);
+	}
+}
+
+int	get_time(t_data *data)
 {
 	int	time;
 
-	pthread_mutex_lock(&philo->lock);
-	time = philo->time;
-	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_lock(&data->t_lock);
+	time = data->time;
+	pthread_mutex_unlock(&data->t_lock);
 	return (time);
-}
-
-void	update_philo_clock( int update, int	*time, pthread_mutex_t *lock)
-{
-	pthread_mutex_lock(lock);
-	*time = update;
-	pthread_mutex_unlock(lock);
 }
 
 void	*internal_clock(void *arg)
 {
-	pthread_mutex_t	mutex_clock;
 	struct	timeval	current_t;
-	t_philo			*philo;
+	int				usec_delta;
 	int				usec_start;
-	int				usec_delta;		
-	int				ms;
+	t_data			*data;
 
-	pthread_mutex_init(&mutex_clock, NULL);
-	ms = 0;
-	philo = (t_philo *)arg;
+	data = (t_data *)arg;
 	gettimeofday(&current_t, NULL);
 	usec_start = current_t.tv_usec;
-	while (philo->alive == 1)
+	while (data->someone_dead == 0)
 	{
 		gettimeofday(&current_t, NULL);
 		usec_delta = current_t.tv_usec;
@@ -51,13 +54,13 @@ void	*internal_clock(void *arg)
 			usec_start = 0;
 		else if (usec_delta - usec_start >= 1000)
 		{
-			ms++;
-			update_philo_clock(ms, &philo->time, &mutex_clock);
+			pthread_mutex_lock(&data->t_lock);
+			data->time += 1;
+			pthread_mutex_unlock(&data->t_lock);
 			usec_start = usec_delta;
 			usec_delta = 0;
 		}
 		usleep(500);
 	}
-	pthread_mutex_destroy(&mutex_clock);
-	return (philo);
+	return (data);
 }

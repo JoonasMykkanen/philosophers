@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/05/10 13:51:34 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/05/12 16:10:22 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +21,14 @@ OBJS += $(OBJDIR)/end.o
 OBJS += $(OBJDIR)/init.o
 OBJS += $(OBJDIR)/start.o
 OBJS += $(OBJDIR)/clock.o
-OBJS += $(OBJDIR)/problem.o
 OBJS += $(OBJDIR)/helpers.o
 OBJS += $(OBJDIR)/ft_atoi.o
 OBJS += $(OBJDIR)/routine.o
+OBJS += $(OBJDIR)/activities.o
 
 INCLUDES = includes/philo.h
 
 FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
-
-DBFLAGS = -g -fsanitize=address
 
 .PHONY: all
 all: $(NAME)
@@ -52,7 +50,13 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
-.PHONY: test
-test: $(OBJS)
-	cc $(DBFLAGS) $(FLAGS) $(OBJS) -o $(NAME)
-	./philo
+.PHONY: address
+address: fclean $(OBJS)
+	cc $(FLAGS) -g -fsanitize=address $(OBJS) -o $(NAME)
+	./philo 3 500 100 100 3
+
+.PHONY: thread
+thread: fclean $(OBJS)
+	cc $(FLAGS) -g -fsanitize=thread $(OBJS) -o $(NAME)
+	./philo 3 500 100 100 3
+	
