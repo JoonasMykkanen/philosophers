@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:14 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 16:00:28 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 13:33:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	bury_philos(t_data *data)
 	{
 		if (pthread_join(data->philos[id].thread, NULL) != 0)
 			return (1);
+		printf("%d joined \n", id);
 		usleep(50);
 	}
 	return (0);
@@ -46,13 +47,14 @@ int	end(t_data *data)
 {
 	if (bury_philos(data) != 0)
 		return (1);
-	if (wash_forks(data) != 0)
-		return (1);
-	pthread_mutex_destroy(&data->t_lock);
-	pthread_mutex_destroy(&data->pulse);
-	if (data->philos)
-		free(data->philos);
-	if (data->forks)
-		free(data->forks);
+	// if (wash_forks(data) != 0)
+	// 	return (1);
+	// pthread_join(data->clock, NULL);
+	// pthread_mutex_destroy(&data->t_lock);
+	// pthread_mutex_destroy(&data->pulse);
+	// if (data->philos)
+	// 	free(data->philos);
+	// if (data->forks)
+	// 	free(data->forks);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 15:24:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 13:32:45 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*internal_clock(void *arg)
 	data = (t_data *)arg;
 	gettimeofday(&current_t, NULL);
 	usec_start = current_t.tv_usec;
-	while (data->someone_dead == 0)
+	while (1)
 	{
 		gettimeofday(&current_t, NULL);
 		usec_delta = current_t.tv_usec;

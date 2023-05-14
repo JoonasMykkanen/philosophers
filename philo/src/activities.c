@@ -6,25 +6,30 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 15:48:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 13:43:11 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	grabf(t_philo *philo, int time)
+{
+	return (0);
+}
 
 int	feast(t_philo *philo, int time)
 {
 	pthread_mutex_lock(&philo->left->fork);
 	if (pthread_mutex_lock(&philo->right->fork) != 0)
 		pthread_mutex_unlock(&philo->left->fork);
-	if (check_pulse(philo) == 1)
+	printf("%d %d has taken fork\n", time, philo->id);
+	time = get_time(philo->data);
+	if (am_i_dead(philo, time) == 0)
 	{
-		time = get_time(philo->data);
-		printf("%d %d has taken fork\n", time, philo->id);
 		printf("%d %d is eating\n", time, philo->id);
 		corrected_sleep(philo->time_to_eat, philo->data);
 		philo->times_to_eat -= 1;
-		philo->last_meal = time + philo->time_to_eat;
+		philo->last_meal = time;
 		pthread_mutex_unlock(&philo->right->fork);
 		pthread_mutex_unlock(&philo->left->fork);
 		return (0);
@@ -47,8 +52,15 @@ int	think(t_philo *philo, int time)
 	return (0);
 }
 
-int	death(t_philo *philo, int time)
+int	death(t_philo *philo)
 {
-	printf("%d %d died\n",time, philo->id);
+	int	time;
+	
+	time = get_time(philo->data);
+	philo->alive = 0;
+	pthread_mutex_lock(&philo->data->s_lock);
+	philo->data->someone_dead = 1;
+	pthread_mutex_unlock(&philo->data->s_lock);
+	printf("%d %d died\n", time, philo->id);
 	return (1);
 }

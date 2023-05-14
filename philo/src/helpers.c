@@ -6,33 +6,46 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 16:07:16 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 13:40:54 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+int	am_i_dead(t_philo *philo, int time)
+{
+	if ((time - philo->last_meal) < philo->time_to_die)
+		return (0);
+	else		
+		return (death(philo));
+}
+
+int	not_hungry(t_philo *philo)
+{
+	if (philo->times_to_eat <= 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	someone_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->s_lock);
+	if (philo->data->someone_dead == 1)
+	{
+		pthread_mutex_unlock(&philo->data->s_lock);
+		printf("philo %d found that someone died \n", philo->id);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->s_lock);
+	return (0);
+}
 
 int	check_values(t_data *data)
 {
 	return (0);
 }
 
-int	check_pulse(t_philo *philo)
-{
-	int	time;
-
-	time = get_time(philo->data);
-	if ((time - philo->last_meal) > philo->time_to_die)
-	{
-		pthread_mutex_lock(&philo->data->pulse);
-		philo->data->someone_dead = 1;
-		pthread_mutex_unlock(&philo->data->pulse);
-		death(philo, time);
-		return (0);
-	}
-	return (1);
-}
 
 void	clean_exit(t_data *data)
 {

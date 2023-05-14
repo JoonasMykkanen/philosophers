@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:18:27 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 15:45:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 13:39:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 static int	do_stuff(t_philo *philo, int (*activity) (t_philo *, int))
 {
-	int	exit_status;
 	int	time;
 
 	time = get_time(philo->data);
-	if (check_pulse(philo) != 1)
-	{
-		philo->alive = 0;
-		exit_status = 1;
-	}
-	else
-	{
-		if (philo->times_to_eat > 0)
-			exit_status = activity(philo, time);
-		else
-			exit_status = 1;
-	}
-	return (exit_status);
+	if (someone_dead(philo) == 1)
+		return (1);
+	if (am_i_dead(philo, time) == 1)
+		return (1);
+	return (activity(philo, time));
 }
 
 void	*routine(void *arg)
@@ -38,7 +29,7 @@ void	*routine(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *)arg;
-	while (42)
+	while (1)
 	{
 		if (do_stuff(philo, &feast) == 1)
 			break ;
@@ -46,6 +37,8 @@ void	*routine(void *arg)
 			break ;
 		if (do_stuff(philo, &think) == 1)
 			break ;
+		usleep(50);
 	}
+	printf("Broke out of routine %d \n", philo->id);
 	return (philo);
 }

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 15:37:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 12:14:56 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef struct s_fork	t_fork;
 typedef struct 	s_data
 {
 	pthread_mutex_t	t_lock;
-	pthread_mutex_t	pulse;
+	pthread_mutex_t	s_lock;
+	pthread_t		monitor;
 	pthread_t		clock;
 	t_philo 		*philos;
 	t_fork 			*forks;
@@ -50,6 +51,7 @@ typedef struct	s_philo
 	pthread_mutex_t	lock;
 	pthread_t		thread;
 	int				last_meal;
+	int				philo_count;
 	int				time_to_sleep;
 	int				times_to_eat;
 	int				time_to_eat;
@@ -69,9 +71,16 @@ typedef struct s_fork
 }				t_fork;
 
 
+int	am_i_dead(t_philo *philo, int time);
+int	someone_dead(t_philo *philo);
+int	not_hungry(t_philo *philo);
+
+int	grabf(t_philo *philo, int time);
+
 int		end(t_data *data);
 int		start(t_data *data);
 void	*routine(void *arg);
+int		death(t_philo *philo);
 int		get_time(t_data *data);
 void	clean_exit(t_data *data);
 int		ft_atoi(const char *str);
@@ -79,11 +88,10 @@ int		start_clock(t_data *data);
 int		finnished(t_philo *philo);
 void	*internal_clock(void *arg);
 int		check_values(t_data *data);
-int		check_pulse(t_philo *philo);
+int		check_status(t_philo *philo);
 void	*distribute_time(void *arg);
 void	handle_problem(t_data *data);
 int		rest(t_philo *philo, int time);
-int		death(t_philo *philo, int time);
 int		feast(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
 void	corrected_sleep(int	dur, t_data *data);

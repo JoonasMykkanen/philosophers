@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/12 16:05:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/14 10:12:22 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	create_philos(t_data *data)
 		data->philos[id].data = data;
 		data->philos[id].last_meal = 0;
 		data->philos[id].right = &data->forks[id];
+		data->philos[id].philo_count = data->philo_count;
 		data->philos[id].time_to_eat = data->time_to_eat;
 		data->philos[id].time_to_die = data->time_to_die;
 		data->philos[id].times_to_eat = data->times_to_eat;
@@ -77,7 +78,7 @@ int	init(int argc, char **argv, t_data *data)
 			return (1);
 		if (pthread_mutex_init(&data->t_lock, NULL) != 0)
 			return (1);
-		if (pthread_mutex_init(&data->pulse, NULL) != 0)
+		if (pthread_mutex_init(&data->s_lock, NULL) != 0)
 			return (1);
 		return (0);
 	}
