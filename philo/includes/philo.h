@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/14 12:14:56 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/15 12:12:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct 	s_data
 	pthread_t		clock;
 	t_philo 		*philos;
 	t_fork 			*forks;
+	int				done;
 	int				time;
 	int				philo_count;
 	int				time_to_die;

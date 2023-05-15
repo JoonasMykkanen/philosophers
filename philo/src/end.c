@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:14 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/15 11:53:03 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/15 12:15:56 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static int	bury_philos(t_data *data)
 			return (1);
 		usleep(50);
 	}
+	pthread_mutex_lock(&data->s_lock);
+	data->done = 1;
+	pthread_mutex_unlock(&data->s_lock);
 	return (0);
 }
 
@@ -46,9 +49,9 @@ int	end(t_data *data)
 {
 	if (bury_philos(data) != 0)
 		return (1);
+	pthread_join(data->clock, NULL);
 	// if (wash_forks(data) != 0)
 	// 	return (1);
-	// pthread_join(data->clock, NULL);
 	// pthread_mutex_destroy(&data->t_lock);
 	// pthread_mutex_destroy(&data->pulse);
 	// if (data->philos)

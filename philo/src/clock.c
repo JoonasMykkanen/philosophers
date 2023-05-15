@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/14 13:32:45 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/15 12:14:37 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ int	get_time(t_data *data)
 	return (time);
 }
 
+static int	stop(t_data *data)
+{
+	pthread_mutex_lock(&data->s_lock);
+	if (data->someone_dead == 1)
+	{
+		if (data->done == 1)
+		{
+			pthread_mutex_unlock(&data->s_lock);
+			return (1);
+		}
+	}
+	pthread_mutex_unlock(&data->s_lock);
+	return (0);
+}
+
 void	*internal_clock(void *arg)
 {
 	struct	timeval	current_t;
@@ -60,7 +75,9 @@ void	*internal_clock(void *arg)
 			usec_start = usec_delta;
 			usec_delta = 0;
 		}
-		usleep(500);
+		usleep(333);
+		if (stop(data) == 1)
+			break ;
 	}
 	return (data);
 }

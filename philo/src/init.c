@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/14 10:12:22 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/15 12:12:19 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	init(int argc, char **argv, t_data *data)
 	if (argc != 5 || argc != 6)
 	{
 		data->time = 0;
+		data->done = 0;
 		data->someone_dead = 0;
 		data->philo_count = ft_atoi(argv[1]);
 		data->time_to_die = ft_atoi(argv[2]);
