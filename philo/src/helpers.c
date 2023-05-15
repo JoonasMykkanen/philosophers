@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/14 13:40:54 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/15 11:52:53 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	someone_dead(t_philo *philo)
 	if (philo->data->someone_dead == 1)
 	{
 		pthread_mutex_unlock(&philo->data->s_lock);
-		printf("philo %d found that someone died \n", philo->id);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->s_lock);
