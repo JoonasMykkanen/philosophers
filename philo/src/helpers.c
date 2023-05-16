@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/15 11:52:53 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/16 18:02:52 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	am_i_dead(t_philo *philo, int time)
 {
+	if (philo->times_to_eat <= 0)
+		return (1);
 	if ((time - philo->last_meal) < philo->time_to_die)
 		return (0);
 	else		

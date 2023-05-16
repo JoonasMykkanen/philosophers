@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/05/14 11:16:21 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/05/16 17:47:31 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,10 +53,15 @@ re: fclean all
 .PHONY: address
 address: fclean $(OBJS)
 	cc $(FLAGS) -g -fsanitize=address $(OBJS) -o $(NAME)
-	./philo 3 500 100 100 3
+	./philo 5 500 200 100 3
 
 .PHONY: thread
 thread: fclean $(OBJS)
 	cc $(FLAGS) -g -fsanitize=thread $(OBJS) -o $(NAME)
-	./philo 3 500 100 100 3
+	./philo 5 500 200 100 3
+
+.PHONY:
+leaks: fclean $(OBJS)
+	cc $(FLAGS) $(OBJS) -o $(NAME)
+	leaks --atExit -- ./philo 5 100 200 100
 	
