@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/18 16:30:08 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/18 16:37:18 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	create_forks(t_data *data)
 {
+	t_fork	fork;
 	int		id;
 
 	id = 0;
@@ -22,6 +23,7 @@ static int	create_forks(t_data *data)
 		handle_problem(data);
 	while (++id <= data->philo_count)
 	{
+		data->forks[id] = fork;
 		data->forks[id].id = id;
 		if (pthread_mutex_init(&data->forks[id].fork, NULL) != 0)
 			handle_problem(data);
@@ -32,6 +34,7 @@ static int	create_forks(t_data *data)
 
 static int	create_philos(t_data *data)
 {
+	t_philo	philo;
 	int id;
 
 	id = 0;
@@ -40,6 +43,7 @@ static int	create_philos(t_data *data)
 		handle_problem(data);
 	while (++id <= data->philo_count)
 	{
+		data->philos[id] = philo;
 		data->philos[id].id = id;
 		data->philos[id].time = 0;
 		data->philos[id].alive = 1;

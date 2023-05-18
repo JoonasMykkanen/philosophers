@@ -87,6 +87,7 @@ int		rest(t_philo *philo, int time);
 int		feast(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
 int		am_i_dead(t_philo *philo, int time);
+void	*ft_calloc(size_t count, size_t size);
 void	corrected_sleep(int	dur, t_data *data);
 int		init(int argc, char **argv, t_data *data);
 

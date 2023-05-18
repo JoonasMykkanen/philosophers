@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/05/17 08:47:40 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/05/18 16:38:42 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ OBJS += $(OBJDIR)/init.o
 OBJS += $(OBJDIR)/start.o
 OBJS += $(OBJDIR)/clock.o
 OBJS += $(OBJDIR)/helpers.o
-OBJS += $(OBJDIR)/ft_atoi.o
 OBJS += $(OBJDIR)/routine.o
+OBJS += $(OBJDIR)/lib_funcs.o
 OBJS += $(OBJDIR)/activities.o
 
 INCLUDES = includes/philo.h
@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	cc $(FLAGS) -g $(OBJS) -o $(NAME)
 
 $(OBJDIR)/%.o: src/%.c
-	cc -g -c $< -o $@
+	cc -c $< -o $@
 
 .PHONY: clean
 clean:
@@ -63,5 +63,5 @@ thread: fclean $(OBJS)
 .PHONY:
 leaks: fclean $(OBJS)
 	cc $(FLAGS) -g $(OBJS) -o $(NAME)
-	leaks --atExit -- ./philo 5 100 200 100 3
+	leaks --atExit -- ./philo 5 500 200 100 3
 	
