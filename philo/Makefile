@@ -22,8 +22,8 @@ OBJS += $(OBJDIR)/init.o
 OBJS += $(OBJDIR)/start.o
 OBJS += $(OBJDIR)/clock.o
 OBJS += $(OBJDIR)/helpers.o
-OBJS += $(OBJDIR)/ft_atoi.o
 OBJS += $(OBJDIR)/routine.o
+OBJS += $(OBJDIR)/lib_funcs.o
 OBJS += $(OBJDIR)/activities.o
 
 INCLUDES = includes/philo.h
@@ -34,10 +34,10 @@ FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	cc $(FLAGS) $(OBJS) -o $(NAME)
+	cc $(FLAGS) -g $(OBJS) -o $(NAME)
 
 $(OBJDIR)/%.o: src/%.c
-	cc -c $< -o $@
+	cc -c -g $< -o $@
 
 .PHONY: clean
 clean:
@@ -62,6 +62,6 @@ thread: fclean $(OBJS)
 
 .PHONY:
 leaks: fclean $(OBJS)
-	cc $(FLAGS) $(OBJS) -o $(NAME)
-	leaks --atExit -- ./philo 5 100 200 100
+	cc $(FLAGS) -g $(OBJS) -o $(NAME)
+	leaks --atExit -- ./philo 5 500 200 100 3
 	

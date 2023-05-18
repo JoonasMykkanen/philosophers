@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   lib_funcs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,4 +47,36 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (sum * neg);
+}
+
+static void	ft_bzero(void *s, size_t n)
+{
+	int	i;
+
+	i = 0;
+	while (n > 0)
+	{
+		*((char *)s + i) = '\0';
+		n--;
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	size_t	len;
+	void	*ptr;
+
+	if (count == 0 || size == 0)
+		return (NULL);
+	len = count * size;
+	if (len / size != count)
+		return (NULL);
+	ptr = malloc(len);
+	if (ptr)
+	{
+		ft_bzero(ptr, len);
+		return (ptr);
+	}
+	return (NULL);
 }

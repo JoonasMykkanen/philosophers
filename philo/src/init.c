@@ -14,12 +14,14 @@
 
 static int	create_forks(t_data *data)
 {
+	t_fork	fork;
 	int		id;
 
 	id = 0;
-	data->forks = malloc(data->philo_count + 1 * sizeof(t_fork));
+	data->forks = ft_calloc(data->philo_count + 1, sizeof(t_fork));
 	while (++id <= data->philo_count)
 	{
+		data->forks[id] = fork;
 		data->forks[id].id = id;
 		if (pthread_mutex_init(&data->forks[id].fork, NULL) != 0)
 			return (1);
@@ -29,12 +31,15 @@ static int	create_forks(t_data *data)
 
 static int	create_philos(t_data *data)
 {
+	t_philo	philo;
 	int id;
 
 	id = 0;
-	data->philos = malloc(data->philo_count + 1 * sizeof(t_philo));
+	data->philos = ft_calloc(data->philo_count + 1, sizeof(t_philo));
+	
 	while (++id <= data->philo_count)
 	{
+		data->philos[id] = philo;
 		data->philos[id].id = id;
 		data->philos[id].time = 0;
 		data->philos[id].alive = 1;
@@ -74,9 +79,9 @@ int	init(int argc, char **argv, t_data *data)
 		if (check_values(data) != 0)
 			return (1);
 		if (create_forks(data) != 0)
-			return (1);
+			return (1);		
 		if (create_philos(data) != 0)
-			return (1);
+			return (1);	
 		if (pthread_mutex_init(&data->t_lock, NULL) != 0)
 			return (1);
 		if (pthread_mutex_init(&data->s_lock, NULL) != 0)
