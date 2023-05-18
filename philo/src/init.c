@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/16 17:11:24 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/18 16:30:08 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ static int	create_forks(t_data *data)
 
 	id = 0;
 	data->forks = malloc(data->philo_count + 1 * sizeof(t_fork));
+	if (!data->forks)
+		handle_problem(data);
 	while (++id <= data->philo_count)
 	{
 		data->forks[id].id = id;
 		if (pthread_mutex_init(&data->forks[id].fork, NULL) != 0)
-			return (1);
+			handle_problem(data);
+		data->fork_count++;
 	}
 	return (0);
 }
@@ -33,6 +36,8 @@ static int	create_philos(t_data *data)
 
 	id = 0;
 	data->philos = malloc(data->philo_count + 1 * sizeof(t_philo));
+	if (!data->philos)
+		handle_problem(data);
 	while (++id <= data->philo_count)
 	{
 		data->philos[id].id = id;
@@ -47,7 +52,8 @@ static int	create_philos(t_data *data)
 		data->philos[id].times_to_eat = data->times_to_eat;
 		data->philos[id].time_to_sleep = data->time_to_sleep;
 		if (pthread_mutex_init(&data->philos[id].lock, NULL) != 0)
-			return (1);
+			handle_problem(data);
+		data->lock_count++;
 		if (id == 1)
 			data->philos[id].left = &data->forks[data->philo_count];
 		else
@@ -62,7 +68,12 @@ int	init(int argc, char **argv, t_data *data)
 	{
 		data->time = 0;
 		data->done = 0;
+		data->forks = NULL;
+		data->philos = NULL;
+		data->lock_count = 0;
+		data->fork_count = 0;
 		data->someone_dead = 0;
+		data->thread_count = 0;
 		data->philo_count = ft_atoi(argv[1]);
 		data->time_to_die = ft_atoi(argv[2]);
 		data->time_to_eat = ft_atoi(argv[3]);
@@ -72,15 +83,15 @@ int	init(int argc, char **argv, t_data *data)
 		else
 			data->times_to_eat = INT_MAX;
 		if (check_values(data) != 0)
-			return (1);
+			handle_problem(data);
 		if (create_forks(data) != 0)
-			return (1);
+			handle_problem(data);
 		if (create_philos(data) != 0)
-			return (1);
+			handle_problem(data);
 		if (pthread_mutex_init(&data->t_lock, NULL) != 0)
-			return (1);
+			handle_problem(data);
 		if (pthread_mutex_init(&data->s_lock, NULL) != 0)
-			return (1);
+			handle_problem(data);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/05/16 17:47:31 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/05/17 08:47:40 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	cc $(FLAGS) $(OBJS) -o $(NAME)
+	cc $(FLAGS) -g $(OBJS) -o $(NAME)
 
 $(OBJDIR)/%.o: src/%.c
-	cc -c $< -o $@
+	cc -g -c $< -o $@
 
 .PHONY: clean
 clean:
@@ -62,6 +62,6 @@ thread: fclean $(OBJS)
 
 .PHONY:
 leaks: fclean $(OBJS)
-	cc $(FLAGS) $(OBJS) -o $(NAME)
-	leaks --atExit -- ./philo 5 100 200 100
+	cc $(FLAGS) -g $(OBJS) -o $(NAME)
+	leaks --atExit -- ./philo 5 100 200 100 3
 	

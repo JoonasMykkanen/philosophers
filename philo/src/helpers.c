@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/16 18:02:52 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/18 16:32:51 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,29 @@ int	someone_dead(t_philo *philo)
 
 int	check_values(t_data *data)
 {
+	if (data->philo_count == 0)
+		return (1);
 	return (0);
 }
 
 
 void	clean_exit(t_data *data)
 {
+	int	idx;
 
+	idx = 0;
+	while (++idx <= data->fork_count)
+		pthread_mutex_destroy(&data->forks[idx].fork);
+	idx = 0;
+	while (++idx <= data->lock_count)
+		pthread_mutex_destroy(&data->philos[idx].lock);
+	if (data->forks != NULL)
+		free(data->forks);
+	if (data->philos != NULL)
+		free(data->philos);
 }
 
 void	handle_problem(t_data *data)
 {
-	
+	clean_exit(data);
 }
