@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/18 16:37:18 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/18 16:37:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	create_forks(t_data *data)
 	int		id;
 
 	id = 0;
-	data->forks = malloc(data->philo_count + 1 * sizeof(t_fork));
+	data->forks = ft_calloc(data->philo_count + 1, sizeof(t_fork));
 	if (!data->forks)
 		handle_problem(data);
 	while (++id <= data->philo_count)
@@ -38,7 +38,7 @@ static int	create_philos(t_data *data)
 	int id;
 
 	id = 0;
-	data->philos = malloc(data->philo_count + 1 * sizeof(t_philo));
+	data->philos = ft_calloc(data->philo_count + 1, sizeof(t_philo));
 	if (!data->philos)
 		handle_problem(data);
 	while (++id <= data->philo_count)
