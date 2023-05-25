@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/18 16:37:59 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 09:09:19 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	init(int argc, char **argv, t_data *data)
 			data->times_to_eat = ft_atoi(argv[5]);
 		else
 			data->times_to_eat = INT_MAX;
-		if (check_values(data) != 0)
-			handle_problem(data);
+		// if (check_values(data) != 0)
+		// 	return (1);
 		if (create_forks(data) != 0)
 			handle_problem(data);
 		if (create_philos(data) != 0)

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:18:27 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 09:44:44 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 14:10:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	*routine(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2)
+		corrected_sleep(philo->time_to_eat, philo->data);
 	while (1)
 	{
 		if (do_stuff(philo, &feast) == 1)

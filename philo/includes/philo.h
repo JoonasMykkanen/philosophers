@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/18 16:24:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 09:02:11 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		start(t_data *data);
 void	*routine(void *arg);
 int		death(t_philo *philo);
 int		get_time(t_data *data);
+int		one_philo(t_data *data);
 void	clean_exit(t_data *data);
 int		ft_atoi(const char *str);
 int		start_clock(t_data *data);
