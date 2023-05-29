@@ -54,15 +54,15 @@ re: fclean all
 .PHONY: address
 address: fclean $(OBJS)
 	cc $(FLAGS) -g -fsanitize=address $(OBJS) -o $(NAME)
-	./philo 5 500 200 100 3
+	./philo 10 500 200 100 3
 
 .PHONY: thread
 thread: fclean $(OBJS)
 	cc $(FLAGS) -g -fsanitize=thread $(OBJS) -o $(NAME)
-	./philo 5 500 200 100 3
+	./philo 10 500 200 100 3
 
 .PHONY:
 leaks: fclean $(OBJS)
 	cc $(FLAGS) -g $(OBJS) -o $(NAME)
-	leaks --atExit -- ./philo 5 500 200 100 3
+	leaks --atExit -- ./philo 10 500 200 100 3
 	

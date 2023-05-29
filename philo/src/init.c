@@ -86,8 +86,8 @@ int	init(int argc, char **argv, t_data *data)
 			data->times_to_eat = ft_atoi(argv[5]);
 		else
 			data->times_to_eat = INT_MAX;
-		// if (check_values(data) != 0)
-		// 	return (1);
+		if (check_values(data) != 0) 
+			return (1);
 		if (create_forks(data) != 0)
 			handle_problem(data);
 		if (create_philos(data) != 0)

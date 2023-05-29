@@ -12,6 +12,28 @@
 
 #include "../includes/philo.h"
 
+static int	ft_isnum(const char *str)
+{
+	int	idx;
+
+	if (!str)
+		return (1);
+	idx = 0;
+	while(str[idx] != '\0')
+	{
+		if (str[idx] == 45 && idx == 0)
+			idx++;
+		else if (str[idx] >= 48 && str[idx] <= 57)
+			idx++;
+		else
+			return (1);
+	}
+	if (idx == 0)
+		return (1);
+	return (0);
+}
+
+
 static int	ft_overflow(int neg)
 {
 	if (neg == 1)
@@ -27,8 +49,8 @@ int	ft_atoi(const char *str)
 	int			neg;
 	long long	sum;
 
-	// if (ft_isnum(str) != 0)
-	// 	return (NULL);
+	if (ft_isnum(str) != 0)
+		return (0);
 	i = 0;
 	sum = 0;
 	neg = 1;
@@ -82,24 +104,3 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (NULL);
 }
-
-// static int	ft_isnum(char *str)
-// {
-// 	int	idx;
-
-// 	if (!str)
-// 		return (1);
-// 	idx = 0;
-// 	while(str[idx] != '\0')
-// 	{
-// 		if (str[idx] == 45 && idx == 0)
-// 			idx++;
-// 		else if (str[idx] >= 48 && str[idx] <= 57)
-// 			idx++;
-// 		else
-// 			return (1);
-// 	}
-// 	if (idx == 0)
-// 		return (1);
-// 	return (0);
-// }

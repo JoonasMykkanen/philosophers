@@ -14,16 +14,14 @@
 
 static int	check_numbers(t_data *data)
 {
-	if (data->philo_count == NULL)
-		printf("TEST FAILED \n");
-	if (data->time_to_die == NULL)
-		printf("TEST FAILED \n");
-	if (data->time_to_eat == NULL)
-		printf("TEST FAILED \n");
-	if (data->time_to_sleep == NULL)
-		printf("TEST FAILED \n");
-	if (data->times_to_eat == NULL)
-		printf("TEST FAILED \n");
+	if (data->time_to_die == 0)
+		return (1);
+	if (data->time_to_eat == 0)
+		return (1);
+	if (data->time_to_sleep == 0)
+		return (1);
+	if (data->times_to_eat == 0)
+		return (1);
 	return (0);
 }
 

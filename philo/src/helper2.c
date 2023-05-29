@@ -19,7 +19,7 @@ int	am_i_dead(t_philo *philo, int time)
 	if ((time - philo->last_meal) < philo->time_to_die)
 		return (0);
 	else
-		return (death(philo, time));
+		return (death(philo));
 }
 
 int	not_hungry(t_philo *philo)
