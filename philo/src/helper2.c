@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 01:22:50 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/19 01:34:55 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/29 12:41:01 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	am_i_dead(t_philo *philo, int time)
 		return (1);
 	if ((time - philo->last_meal) < philo->time_to_die)
 		return (0);
-	else		
-		return (death(philo));
+	else
+		return (death(philo, time));
 }
 
 int	not_hungry(t_philo *philo)
