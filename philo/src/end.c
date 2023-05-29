@@ -21,7 +21,6 @@ static int	wait_philos(t_data *data)
 	{
 		if (pthread_join(data->philos[id].thread, NULL) != 0)
 			handle_problem(data);
-		usleep(50);
 	}
 	pthread_mutex_lock(&data->s_lock);
 	data->done = 1;

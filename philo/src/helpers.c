@@ -52,6 +52,7 @@ void	clean_exit(t_data *data)
 		free(data->forks);
 	if (data->philos != NULL)
 		free(data->philos);
+	exit(1);
 }
 
 void	handle_problem(t_data *data)

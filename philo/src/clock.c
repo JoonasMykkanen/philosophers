@@ -22,7 +22,7 @@ void	corrected_sleep(int dur, t_data *data)
 	end = start + dur;
 	while (get_time(data) < end)
 	{
-		usleep(100);
+		usleep(500);
 	}
 }
 

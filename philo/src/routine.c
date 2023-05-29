@@ -35,11 +35,11 @@ void	*routine(void *arg)
 		corrected_sleep(philo->time_to_eat - 5, philo->data);
 	while (1)
 	{
+		if (do_stuff(philo, &think, 3) == 1)
+			break ;
 		if (do_stuff(philo, &feast, 1) == 1)
 			break ;
 		if (do_stuff(philo, &rest, 2) == 1)
-			break ;
-		if (do_stuff(philo, &think, 3) == 1)
 			break ;
 		usleep(50);
 	}

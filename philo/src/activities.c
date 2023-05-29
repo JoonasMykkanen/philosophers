@@ -15,20 +15,25 @@
 int	feast(t_philo *philo, int time)
 {
 	pthread_mutex_lock(&philo->left->fork);
+	if (am_i_dead(philo, get_time(philo->data) == 0))
+		printf("%d %d has taken fork\n", time, philo->id);
 	if (pthread_mutex_lock(&philo->right->fork) != 0)
 		pthread_mutex_unlock(&philo->left->fork);
 	time = get_time(philo->data);
-	if (am_i_dead(philo, time), someone_dead(philo) == 0)
+	if (someone_dead(philo) == 0 && am_i_dead(philo, time) == 0)
 	{
 		time = get_time(philo->data);
 		printf("%d %d has taken fork\n", time, philo->id);
 		printf("%d %d is eating\n", time, philo->id);
-		corrected_sleep (philo->time_to_eat, philo->data);
-		philo->times_to_eat -= 1;
-		philo->last_meal = time;
-		pthread_mutex_unlock(&philo->right->fork);
-		pthread_mutex_unlock(&philo->left->fork);
-		return (0);
+		if (am_i_dead(philo, get_time(philo->data)) == 0)
+		{
+			philo->times_to_eat -= 1;
+			philo->last_meal = time;
+			corrected_sleep (philo->time_to_eat, philo->data);
+			pthread_mutex_unlock(&philo->right->fork);
+			pthread_mutex_unlock(&philo->left->fork);
+			return (0);
+		}
 	}
 	pthread_mutex_unlock(&philo->right->fork);
 	pthread_mutex_unlock(&philo->left->fork);
@@ -50,7 +55,7 @@ int	think(t_philo *philo, int time)
 
 int	death(t_philo *philo)
 {
-	int	time_of_death;
+	int time_of_death;
 
 	philo->alive = 0;
 	time_of_death = philo->last_meal + philo->time_to_die;
