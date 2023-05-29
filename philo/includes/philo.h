@@ -73,6 +73,7 @@ typedef struct s_fork
 int		end(t_data *data);
 int		start(t_data *data);
 void	*routine(void *arg);
+int		death(t_philo *philo);
 int		get_time(t_data *data);
 int		one_philo(t_data *data);
 void	clean_exit(t_data *data);
@@ -85,7 +86,6 @@ int		someone_dead(t_philo *philo);
 void	handle_problem(t_data *data);
 int		rest(t_philo *philo, int time);
 int		feast(t_philo *philo, int time);
-int		death(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
 int		am_i_dead(t_philo *philo, int time);
 void	*ft_calloc(size_t count, size_t size);
