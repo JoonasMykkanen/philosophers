@@ -12,7 +12,7 @@
 
 #include "../includes/philo.h"
 
-void	corrected_sleep(int	dur, t_data *data)
+void	corrected_sleep(int dur, t_data *data)
 {
 	int	start;
 	int	end;
@@ -48,14 +48,19 @@ static int	stop(t_data *data)
 	return (0);
 }
 
+static void	add_time(t_data *data)
+{
+	pthread_mutex_lock(&data->t_lock);
+	data->time += 1;
+	pthread_mutex_unlock(&data->t_lock);
+}
+
 void	*internal_clock(void *arg)
 {
-	struct	timeval	current_t;
+	struct timeval	current_t;
 	int				us_delta;
 	int				us_start;
-	t_data			*data;
 
-	data = (t_data *)arg;
 	gettimeofday(&current_t, NULL);
 	us_start = current_t.tv_usec;
 	while (1)
@@ -66,15 +71,13 @@ void	*internal_clock(void *arg)
 			us_start = 0;
 		else if (us_delta - us_start >= 1000)
 		{
-			pthread_mutex_lock(&data->t_lock);
-			data->time += 1;
-			pthread_mutex_unlock(&data->t_lock);
+			add_time((t_data *)arg);
 			us_start = us_delta;
 			us_delta = 0;
 		}
 		usleep(333);
-		if (stop(data) == 1)
+		if (stop((t_data *)arg) == 1)
 			break ;
 	}
-	return (data);
+	return ((t_data *)arg);
 }

@@ -56,7 +56,7 @@ void	clean_exit(t_data *data)
 
 void	handle_problem(t_data *data)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (++idx <= data->thread_count)

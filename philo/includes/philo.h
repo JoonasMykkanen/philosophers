@@ -25,14 +25,14 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_fork	t_fork;
 
-typedef struct 	s_data
+typedef struct s_data
 {
 	pthread_mutex_t	t_lock;
 	pthread_mutex_t	s_lock;
 	pthread_t		monitor;
 	pthread_t		clock;
-	t_philo 		*philos;
-	t_fork 			*forks;
+	t_philo			*philos;
+	t_fork			*forks;
 	int				done;
 	int				time;
 	int				philo_count;
@@ -46,7 +46,7 @@ typedef struct 	s_data
 	int				time_to_sleep;
 }				t_data;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	pthread_mutex_t	lock;
 	pthread_t		thread;
@@ -62,7 +62,7 @@ typedef struct	s_philo
 	int				alive;
 	int				time;
 	int				id;
-}				t_philo;
+}					t_philo;
 
 typedef struct s_fork
 {
@@ -89,7 +89,7 @@ int		feast(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
 int		am_i_dead(t_philo *philo, int time);
 void	*ft_calloc(size_t count, size_t size);
-void	corrected_sleep(int	dur, t_data *data);
+void	corrected_sleep(int dur, t_data *data);
 int		init(int argc, char **argv, t_data *data);
 
 #endif

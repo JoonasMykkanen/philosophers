@@ -19,7 +19,7 @@ static int	ft_isnum(const char *str)
 	if (!str)
 		return (1);
 	idx = 0;
-	while(str[idx] != '\0')
+	while (str[idx] != '\0')
 	{
 		if (str[idx] == 45 && idx == 0)
 			idx++;
@@ -30,16 +30,6 @@ static int	ft_isnum(const char *str)
 	}
 	if (idx == 0)
 		return (1);
-	return (0);
-}
-
-
-static int	ft_overflow(int neg)
-{
-	if (neg == 1)
-		return (-1);
-	if (neg == -1)
-		return (0);
 	return (0);
 }
 
@@ -66,8 +56,6 @@ int	ft_atoi(const char *str)
 	while (str[i] <= '9' && str[i] >= '0')
 	{
 		sum = sum * 10 + (str[i] - '0');
-		if (sum < 0)
-			return (ft_overflow(neg));
 		i++;
 	}
 	return (sum * neg);

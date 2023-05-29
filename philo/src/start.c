@@ -14,12 +14,14 @@
 
 int	start(t_data *data)
 {
-	int	id;
+	t_philo	*philo;
+	int		id;
 
 	id = 0;
 	while (++id <= data->philo_count)
 	{
-		if (pthread_create(&data->philos[id].thread, NULL, &routine, &data->philos[id]) != 0)
+		philo = &data->philos[id];
+		if (pthread_create(&philo->thread, NULL, &routine, philo) != 0)
 			handle_problem(data);
 		data->thread_count++;
 		usleep(10);

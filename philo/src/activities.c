@@ -50,7 +50,7 @@ int	think(t_philo *philo, int time)
 
 int	death(t_philo *philo)
 {
-	int time_of_death;
+	int	time_of_death;
 
 	philo->alive = 0;
 	time_of_death = philo->last_meal + philo->time_to_die;
