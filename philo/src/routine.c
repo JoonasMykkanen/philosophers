@@ -16,6 +16,8 @@ static int	do_stuff(t_philo *philo, int (*activity) (t_philo *, int), int mode)
 {
 	int	time;
 
+	if (not_hungry(philo) == 1)
+		return (1);
 	if (someone_dead(philo) == 1)
 		return (1);
 	time = get_time(philo->data);

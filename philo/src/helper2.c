@@ -14,8 +14,6 @@
 
 int	am_i_dead(t_philo *philo, int time)
 {
-	if (philo->times_to_eat <= 0)
-		return (1);
 	if ((time - philo->last_meal) < philo->time_to_die)
 		return (0);
 	else

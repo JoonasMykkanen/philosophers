@@ -59,6 +59,10 @@ void	handle_problem(t_data *data)
 	int	idx;
 
 	idx = 0;
+	pthread_mutex_lock(&data->s_lock);
+	data->done = 1;
+	data->someone_dead = 1;
+	pthread_mutex_unlock(&data->s_lock);
 	while (++idx <= data->thread_count)
 	{
 		if (pthread_join(data->philos[idx].thread, NULL) != 0)
