@@ -6,20 +6,20 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/29 12:16:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/08 23:38:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <limits.h>
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/time.h>
+# include <limits.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philo	t_philo;
 
@@ -28,7 +28,9 @@ typedef struct s_fork	t_fork;
 typedef struct s_data
 {
 	pthread_mutex_t	t_lock;
+	pthread_mutex_t	d_lock;
 	pthread_mutex_t	s_lock;
+	pthread_mutex_t	p_lock;
 	pthread_t		monitor;
 	pthread_t		clock;
 	t_philo			*philos;
@@ -71,6 +73,7 @@ typedef struct s_fork
 }				t_fork;
 
 int		end(t_data *data);
+void	*monitor(void *arg);
 int		start(t_data *data);
 void	*routine(void *arg);
 int		death(t_philo *philo);
@@ -91,5 +94,8 @@ int		am_i_dead(t_philo *philo, int time);
 void	*ft_calloc(size_t count, size_t size);
 void	corrected_sleep(int dur, t_data *data);
 int		init(int argc, char **argv, t_data *data);
+int		will_i_die_sleeping(t_philo *philo, int time);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_printer(t_data *data, int time, int id, char *msg);
 
 #endif

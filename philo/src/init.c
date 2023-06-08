@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/23 09:09:19 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 10:34:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ int	init(int argc, char **argv, t_data *data)
 		if (pthread_mutex_init(&data->t_lock, NULL) != 0)
 			handle_problem(data);
 		if (pthread_mutex_init(&data->s_lock, NULL) != 0)
+			handle_problem(data);
+		if (pthread_mutex_init(&data->p_lock, NULL) != 0)
+			handle_problem(data);
+		if (pthread_mutex_init(&data->d_lock, NULL) != 0)
 			handle_problem(data);
 		return (0);
 	}

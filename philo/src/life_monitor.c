@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   life_monitor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 01:21:14 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 12:19:42 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/06/01 12:07:12 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/06/08 23:29:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	wait_philos(t_data *data)
+static int	checkup(t_philo *philo, int time)
 {
-	int	id;
+	if (time - philo->last_meal > philo->time_to_die)
+		return (1);
+	return (0);
+}
 
-	id = 0;
-	while (++id <= data->philo_count)
+void	*monitor(void *arg)
+{
+	t_data *data;
+	int		time;
+	int		idx;
+
+	idx = -1;
+	data = (t_data *)arg;
+	while (++idx < data->philo_count)
 	{
-		if (pthread_join(data->philos[id].thread, NULL) != 0)
-			handle_problem(data);
+		time = get_time(data);
+		if (checkup(&data->philos[idx], time) == 1)
+			break ;
+		usleep(8);
 	}
+	pthread_mutex_lock(&data->d_lock);
+	data->someone_dead = 1;
+	pthread_mutex_unlock(&data->d_lock);
 	pthread_mutex_lock(&data->s_lock);
 	data->done = 1;
 	pthread_mutex_unlock(&data->s_lock);
-}
-
-int	end(t_data *data)
-{
-	wait_philos(data);
-	if (pthread_join(data->monitor, NULL) != 0)
-		handle_problem(data);
-	if (pthread_join(data->clock, NULL) != 0)
-		handle_problem(data);
-	clean_exit(data);
-	return (0);
 }

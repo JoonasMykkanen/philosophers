@@ -6,25 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/29 12:05:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 12:06:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-void	corrected_sleep(int dur, t_data *data)
-{
-	int	start;
-	int	end;
-	int	cur;
-
-	start = get_time(data);
-	end = start + dur;
-	while (get_time(data) < end)
-	{
-		usleep(500);
-	}
-}
 
 int	get_time(t_data *data)
 {

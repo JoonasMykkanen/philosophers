@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/05/25 14:10:24 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/06/01 12:07:00 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,12 @@ OBJS += $(OBJDIR)/end.o
 OBJS += $(OBJDIR)/init.o
 OBJS += $(OBJDIR)/start.o
 OBJS += $(OBJDIR)/clock.o
+OBJS += $(OBJDIR)/printer.o
 OBJS += $(OBJDIR)/helpers.o
 OBJS += $(OBJDIR)/routine.o
-OBJS += $(OBJDIR)/helper2.o
 OBJS += $(OBJDIR)/lib_funcs.o
 OBJS += $(OBJDIR)/activities.o
+OBJS += $(OBJDIR)/activity_helpers.o
 
 INCLUDES = includes/philo.h
 
