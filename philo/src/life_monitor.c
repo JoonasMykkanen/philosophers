@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:07:12 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/08 23:29:12 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/09 11:46:52 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	checkup(t_philo *philo, int time)
 
 void	*monitor(void *arg)
 {
-	t_data *data;
+	t_data	*data;
 	int		time;
 	int		idx;
 

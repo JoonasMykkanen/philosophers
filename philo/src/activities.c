@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/08 23:34:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/09 11:46:32 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	think(t_philo *philo, int time)
 
 int	death(t_philo *philo)
 {
-	int time_of_death;
+	int	time_of_death;
 
 	philo->alive = 0;
 	time_of_death = philo->last_meal + philo->time_to_die;
