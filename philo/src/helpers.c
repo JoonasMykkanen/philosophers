@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 12:05:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/09 11:51:54 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	clean_exit(t_data *data)
 	pthread_mutex_destroy(&data->s_lock);
 	pthread_mutex_destroy(&data->t_lock);
 	pthread_mutex_destroy(&data->d_lock);
-	exit(1);
+	exit(0);
 }
 
 void	handle_problem(t_data *data)
