@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/06/01 12:07:00 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/06/11 11:26:58 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,16 +30,16 @@ OBJS += $(OBJDIR)/activity_helpers.o
 
 INCLUDES = includes/philo.h
 
-FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
+FLAGS = -Wall -Werror -Wextra -I $(INCLUDES) -g
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	cc $(FLAGS) -g $(OBJS) -o $(NAME)
+	cc $(FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJDIR)/%.o: src/%.c
-	cc -c $< -o $@
+	cc -c -g $< -o $@
 
 .PHONY: clean
 clean:
@@ -54,16 +54,16 @@ re: fclean all
 
 .PHONY: address
 address: fclean $(OBJS)
-	cc $(FLAGS) -g -fsanitize=address $(OBJS) -o $(NAME)
-	./philo 10 500 200 100 3
+	cc $(FLAGS) -fsanitize=address $(OBJS) -o $(NAME)
+	./philo 4 500 200 100 10
 
 .PHONY: thread
 thread: fclean $(OBJS)
-	cc $(FLAGS) -g -fsanitize=thread $(OBJS) -o $(NAME)
-	./philo 10 500 200 100 3
+	cc $(FLAGS) -fsanitize=thread $(OBJS) -o $(NAME)
+	./philo 4 500 200 100 10
 
 .PHONY:
 leaks: fclean $(OBJS)
-	cc $(FLAGS) -g $(OBJS) -o $(NAME)
-	leaks --atExit -- ./philo 10 500 200 100 3
+	cc $(FLAGS) $(OBJS) -o $(NAME)
+	leaks --atExit -- ./philo 4 500 200 100 10
 	
