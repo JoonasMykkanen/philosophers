@@ -1,9 +1,18 @@
 #Philosophers: The Deadly Game of Threads and Mutexes
 
-#Description
+Description
+
 In this project, the core concept is threading a process, demonstrated through a game of philosophers seated around a table, eating and thinking alternately. The program simulates this scenario where the philosophers' states change between eating, thinking, or sleeping, and their state changes are documented as log outputs. The rules of the game dictate that philosophers must eat with two forks, one on each side, but since the number of forks is equal to the number of philosophers, mutexes are implemented to avoid fork duplication. The simulation stops when a philosopher dies of starvation, making this a deadly game indeed.
 
-#Program Input
+How to Run It
+
+The program is written in C and can be compiled using a Makefile.
+
+./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [<number_of_times_each_philosopher_must_eat>]
+Please note that the Makefile should contain the rules $(NAME), all, clean, fclean, and re.
+
+Program Input
+
 The program takes the following arguments:
 
 number_of_philosophers: The number of philosophers and also the number of forks.
