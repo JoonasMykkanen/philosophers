@@ -7,8 +7,10 @@ In this project, we learn about the fundamentals of threading a process. The aim
 ## How to Run
 
 1. Clone the repository to your local machine.
-2. Navigate to the directory containing the project.
-3. Compile the program by typing `make` in your terminal. This command uses the provided Makefile to compile the project using the flags `-Wall, -Wextra, and -Werror`.
+2. Makefile is in ./philo directory
+3. Compile the program by typing `make` in your terminal.
+4. run with `./philo args`
+
 
 ## Program Inputs
 
