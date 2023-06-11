@@ -1,20 +1,35 @@
-#Philosophers: The Deadly Game of Threads and Mutexes
+# Philosophers - Threading and Mutexes
 
-#Description
-In this project, the core concept is threading a process, demonstrated through a game of philosophers seated around a table, eating and thinking alternately. The program simulates this scenario where the philosophers' states change between eating, thinking, or sleeping, and their state changes are documented as log outputs. The rules of the game dictate that philosophers must eat with two forks, one on each side, but since the number of forks is equal to the number of philosophers, mutexes are implemented to avoid fork duplication. The simulation stops when a philosopher dies of starvation, making this a deadly game indeed.
+## Description
 
-#Program Input
-The program takes the following arguments:
+In this project, we learn about the fundamentals of threading a process. The aim is to understand how to create threads and learn about mutexes. The project represents a scenario where philosophers sit at a round table with a large bowl of spaghetti, and they alternatively eat, think, or sleep. To eat, a philosopher needs to have forks in both hands. The simulation stops when a philosopher dies of starvation. All of these are implemented in C language and the program is fully compliant with the Norm.
 
-number_of_philosophers: The number of philosophers and also the number of forks.
-time_to_die: (in milliseconds) If a philosopher didn't start eating within this time since the beginning of their last meal or the beginning of the simulation, they die.
-time_to_eat: (in milliseconds) The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
-time_to_sleep: (in milliseconds) The time a philosopher will spend sleeping.
-number_of_times_each_philosopher_must_eat (optional): If all philosophers have eaten at least this number of times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
-Here's an example command to run the program:
+## How to Run
 
-./philo 5 800 200 200 7
+1. Clone the repository to your local machine.
+2. Navigate to the directory containing the project.
+3. Compile the program by typing `make` in your terminal. This command uses the provided Makefile to compile the project using the flags `-Wall, -Wextra, and -Werror`.
 
-This means there are 5 philosophers, each will die if they don't start eating within 800 milliseconds, it takes them 200 milliseconds to eat using two forks, and they will sleep for 200 milliseconds. The simulation will stop once all philosophers have eaten 7 times, or if a philosopher dies.
+## Program Inputs
 
-Please note that the program is designed to be race-condition free, ensuring that no two philosophers can use the same fork at the same time, and no philosopher will starve to death under the provided conditions.
+The program requires the following arguments:
+
+- `number_of_philosophers`: The number of philosophers and also the number of forks.
+- `time_to_die (in milliseconds)`: If a philosopher didn't start eating `time_to_die` milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
+- `time_to_eat (in milliseconds)`: The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
+- `time_to_sleep (in milliseconds)`: The time a philosopher will spend sleeping.
+- `number_of_times_each_philosopher_must_eat (optional argument)`: If all philosophers have eaten at least `number_of_times_each_philosopher_must_eat` times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
+
+## Example Input and Expected Output
+
+For instance, to run the program with 5 philosophers, where `time_to_die` is 8000 milliseconds, `time_to_eat` is 200 milliseconds, `time_to_sleep` is 200 milliseconds, and each philosopher must eat 10 times:
+
+The timestamp is given in milliseconds and X represents the philosopher number.
+```sh
+./philo 5 8000 200 200 10
+timestamp_in_ms X has taken a fork
+timestamp_in_ms X is eating
+timestamp_in_ms X is sleeping
+timestamp_in_ms X is thinking
+timestamp_in_ms X died
+```
