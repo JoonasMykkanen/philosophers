@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/09 11:46:32 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/20 18:25:51 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ int	death(t_philo *philo)
 	if (philo->data->someone_dead == 0)
 	{
 		pthread_mutex_unlock(&philo->data->d_lock);
-		pthread_mutex_lock(&philo->data->d_lock);
 		philo->data->someone_dead = 1;
-		pthread_mutex_unlock(&philo->data->d_lock);
+		corrected_sleep(philo->time_to_sleep, philo->data);
+		printf("%d %d died\n", time_of_death, philo->id);
 	}
-	pthread_mutex_unlock(&philo->data->d_lock);
-	corrected_sleep(philo->time_to_sleep, philo->data);
-	ft_printer(philo->data, time_of_death, philo->id, "died");
+	else
+		pthread_mutex_unlock(&philo->data->d_lock);
 	return (1);
 }

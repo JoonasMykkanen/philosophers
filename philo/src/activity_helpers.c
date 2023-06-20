@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 01:22:50 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 11:47:04 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/20 17:58:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	someone_dead(t_philo *philo)
 
 int	one_philo(t_data *data)
 {
+	printf("%d 1 has taken fork\n", data->time_to_sleep);
 	printf("%d 1 died\n", data->time_to_sleep);
 	return (1);
 }

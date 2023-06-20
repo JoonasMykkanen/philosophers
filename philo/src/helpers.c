@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/09 11:51:54 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/20 18:00:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ void	corrected_sleep(int dur, t_data *data)
 
 static int	check_numbers(t_data *data)
 {
-	if (data->time_to_die == 0)
+	if (data->time_to_die <= 0)
 		return (1);
-	if (data->time_to_eat == 0)
+	if (data->time_to_eat <= 0)
 		return (1);
-	if (data->time_to_sleep == 0)
+	if (data->time_to_sleep <= 0)
 		return (1);
-	if (data->times_to_eat == 0)
+	if (data->times_to_eat <= 0)
 		return (1);
 	return (0);
 }
 
 int	check_values(t_data *data)
 {
-	if (data->philo_count == 0)
+	if (data->philo_count <= 0)
 		return (1);
 	if (data->philo_count == 1)
 		return (one_philo(data));
