@@ -1,8 +1,8 @@
-# Philosophers - Threading and Mutexes
+# Philosophers🍝🧙🏼‍♂️ - Multithreading and Mutexes
 
 ## Description
 
-In this project, we learn about the fundamentals of threading a process. The aim is to understand how to create threads and learn about mutexes. The project represents a scenario where philosophers sit at a round table with a large bowl of spaghetti, and they alternatively eat, think, or sleep. To eat, a philosopher needs to have forks in both hands. The simulation stops when a philosopher dies of starvation. All of these are implemented in C language and the program is fully compliant with the Norm.
+In this project, we learn about the fundamentals of threading a process. The aim is to understand how to create threads and how to prevent data races with mutexes. The project represents a scenario where philosophers sit at a round table with a large bowl of spaghetti, they alternatively eat, think, or sleep. To eat, a philosopher needs to have forks in both hands. There are only as many forks as there are philosophers, this means that not all of them can eat at the same time. The simulation stops when a philosopher dies of starvation. 
 
 ## How to Run
 
