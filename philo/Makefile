@@ -6,41 +6,43 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/06/29 17:52:07 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/06/29 17:58:54 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRC = src
-
+SRCDIR = src
 OBJDIR = obj
 
-OBJS = $(OBJDIR)/main.o
-OBJS += $(OBJDIR)/end.o
-OBJS += $(OBJDIR)/init.o
-OBJS += $(OBJDIR)/start.o
-OBJS += $(OBJDIR)/clock.o
-OBJS += $(OBJDIR)/printer.o
-OBJS += $(OBJDIR)/helpers.o
-OBJS += $(OBJDIR)/routine.o
-OBJS += $(OBJDIR)/lib_funcs.o
-OBJS += $(OBJDIR)/activities.o
-OBJS += $(OBJDIR)/life_monitor.o
-OBJS += $(OBJDIR)/activity_helpers.o
+SRCS = $(SRCDIR)/main.c
+SRCS += $(SRCDIR)/end.c
+SRCS += $(SRCDIR)/init.c
+SRCS += $(SRCDIR)/start.c
+SRCS += $(SRCDIR)/clock.c
+SRCS += $(SRCDIR)/printer.c
+SRCS += $(SRCDIR)/helpers.c
+SRCS += $(SRCDIR)/routine.c
+SRCS += $(SRCDIR)/lib_funcs.c
+SRCS += $(SRCDIR)/activities.c
+SRCS += $(SRCDIR)/life_monitor.c
+SRCS += $(SRCDIR)/activity_helpers.c
+
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCLUDES = inc/philo.h
 
 FLAGS = -Wall -Werror -Wextra -I $(INCLUDES) -g
 
 .PHONY: all
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJS)
 	cc $(FLAGS) $(OBJS) -o $(NAME)
 
-$(OBJDIR)/%.o: src/%.c
-	cc -c -g $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCLUDES)
+	mkdir -p $(OBJDIR)
+	cc $(FLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
@@ -63,8 +65,7 @@ thread: fclean $(OBJS)
 	cc $(FLAGS) -fsanitize=thread $(OBJS) -o $(NAME)
 	./philo 4 500 200 100 10
 
-.PHONY:
+.PHONY: leaks
 leaks: fclean $(OBJS)
 	cc $(FLAGS) $(OBJS) -o $(NAME)
 	leaks --atExit -- ./philo 4 500 200 100 10
-	

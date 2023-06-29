@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:07:12 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 17:51:50 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 18:13:10 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	*monitor(void *arg)
 {
 	t_data	*data;
 	int		all_philos_eaten;
-	int		time;
 	int		idx;
 
 	idx = 0;
