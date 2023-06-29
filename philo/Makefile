@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/06/11 11:26:58 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/06/29 17:52:07 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ OBJS += $(OBJDIR)/helpers.o
 OBJS += $(OBJDIR)/routine.o
 OBJS += $(OBJDIR)/lib_funcs.o
 OBJS += $(OBJDIR)/activities.o
+OBJS += $(OBJDIR)/life_monitor.o
 OBJS += $(OBJDIR)/activity_helpers.o
 
-INCLUDES = includes/philo.h
+INCLUDES = inc/philo.h
 
 FLAGS = -Wall -Werror -Wextra -I $(INCLUDES) -g
 

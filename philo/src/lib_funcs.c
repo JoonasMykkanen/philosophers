@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:06:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/08 23:38:21 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:51:48 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 static int	ft_isnum(const char *str)
 {

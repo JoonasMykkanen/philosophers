@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:14 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 12:19:42 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:51:39 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 static void	wait_philos(t_data *data)
 {
@@ -29,9 +29,9 @@ static void	wait_philos(t_data *data)
 
 int	end(t_data *data)
 {
-	wait_philos(data);
 	if (pthread_join(data->monitor, NULL) != 0)
 		handle_problem(data);
+	wait_philos(data);
 	if (pthread_join(data->clock, NULL) != 0)
 		handle_problem(data);
 	clean_exit(data);

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/08 23:38:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:40:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define OK 0
+# define NO_SIM -1
+# define ERROR 1
+
 typedef struct s_philo	t_philo;
 
 typedef struct s_fork	t_fork;
@@ -30,7 +34,6 @@ typedef struct s_data
 	pthread_mutex_t	t_lock;
 	pthread_mutex_t	d_lock;
 	pthread_mutex_t	s_lock;
-	pthread_mutex_t	p_lock;
 	pthread_t		monitor;
 	pthread_t		clock;
 	t_philo			*philos;
@@ -84,12 +87,12 @@ int		ft_atoi(const char *str);
 int		start_clock(t_data *data);
 void	*internal_clock(void *arg);
 int		check_values(t_data *data);
-int		not_hungry(t_philo *philo);
 int		someone_dead(t_philo *philo);
 void	handle_problem(t_data *data);
 int		rest(t_philo *philo, int time);
 int		feast(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
+int		checkup(t_philo *philo, int time);
 int		am_i_dead(t_philo *philo, int time);
 void	*ft_calloc(size_t count, size_t size);
 void	corrected_sleep(int dur, t_data *data);

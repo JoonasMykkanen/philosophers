@@ -6,11 +6,32 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/09 13:11:34 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:51:38 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
+
+void	corrected_sleep(int dur, t_data *data)
+{
+	int	start;
+	int	end;
+	int	cur;
+
+	start = get_time(data);
+	end = start + dur;
+	while (get_time(data) < end)
+	{
+		pthread_mutex_lock(&data->d_lock);
+		if (data->someone_dead == 1)
+		{
+			pthread_mutex_unlock(&data->d_lock);
+			break ;
+		}
+		pthread_mutex_unlock(&data->d_lock);
+		usleep(500);
+	}
+}
 
 int	get_time(t_data *data)
 {

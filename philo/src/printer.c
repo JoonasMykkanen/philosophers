@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:25:40 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/20 18:22:21 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:51:56 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 void	ft_printer(t_data *data, int time, int id, char *msg)
 {

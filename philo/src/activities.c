@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/20 18:25:51 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 17:51:36 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 int	feast(t_philo *philo, int time)
 {
@@ -32,27 +32,27 @@ int	feast(t_philo *philo, int time)
 			corrected_sleep (philo->time_to_eat, philo->data);
 			pthread_mutex_unlock(&philo->right->fork);
 			pthread_mutex_unlock(&philo->left->fork);
-			return (0);
+			return (OK);
 		}
 	}
 	pthread_mutex_unlock(&philo->right->fork);
 	pthread_mutex_unlock(&philo->left->fork);
-	return (1);
+	return (ERROR);
 }
 
 int	rest(t_philo *philo, int time)
 {
 	if (will_i_die_sleeping(philo, time) == 1)
-		return (1);
+		return (ERROR);
 	ft_printer(philo->data, time, philo->id, "is sleeping");
 	corrected_sleep(philo->time_to_sleep, philo->data);
-	return (0);
+	return (OK);
 }
 
 int	think(t_philo *philo, int time)
 {
 	ft_printer(philo->data, time, philo->id, "is thinking");
-	return (0);
+	return (OK);
 }
 
 int	death(t_philo *philo)
@@ -71,5 +71,5 @@ int	death(t_philo *philo)
 	}
 	else
 		pthread_mutex_unlock(&philo->data->d_lock);
-	return (1);
+	return (ERROR);
 }
