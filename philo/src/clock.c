@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:56:47 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 18:11:51 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 19:35:36 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	corrected_sleep(int dur, t_data *data)
 	end = start + dur;
 	while (get_time(data) < end)
 	{
-		// pthread_mutex_lock(&data->d_lock);
-		// if (data->someone_dead == 1)
-		// {
-		// 	pthread_mutex_unlock(&data->d_lock);
-		// 	break ;
-		// }
-		// pthread_mutex_unlock(&data->d_lock);
+		pthread_mutex_lock(&data->d_lock);
+		if (data->someone_dead == 1)
+		{
+			pthread_mutex_unlock(&data->d_lock);
+			break ;
+		}
+		pthread_mutex_unlock(&data->d_lock);
 		usleep(500);
 	}
 }
