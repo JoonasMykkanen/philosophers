@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 17:51:42 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 20:22:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	clean_exit(t_data *data)
 	pthread_mutex_destroy(&data->d_lock);
 }
 
-void	handle_problem(t_data *data)
+int	handle_problem(t_data *data)
 {
 	int	idx;
 
@@ -80,4 +80,5 @@ void	handle_problem(t_data *data)
 			handle_problem(data);
 	}
 	clean_exit(data);
+	return (ERROR);
 }

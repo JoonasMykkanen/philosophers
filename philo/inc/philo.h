@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 17:40:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:36:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <limits.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -86,9 +87,11 @@ void	clean_exit(t_data *data);
 int		ft_atoi(const char *str);
 int		start_clock(t_data *data);
 void	*internal_clock(void *arg);
+int		grab_forks(t_philo *philo);
 int		check_values(t_data *data);
+void	relase_forks(t_philo *philo);
 int		someone_dead(t_philo *philo);
-void	handle_problem(t_data *data);
+int		handle_problem(t_data *data);
 int		rest(t_philo *philo, int time);
 int		feast(t_philo *philo, int time);
 int		think(t_philo *philo, int time);
@@ -97,8 +100,6 @@ int		am_i_dead(t_philo *philo, int time);
 void	*ft_calloc(size_t count, size_t size);
 void	corrected_sleep(int dur, t_data *data);
 int		init(int argc, char **argv, t_data *data);
-int		will_i_die_sleeping(t_philo *philo, int time);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_printer(t_data *data, int time, int id, char *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 18:02:28 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/29 20:24:11 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,18 @@ int	init(int argc, char **argv, t_data *data)
 	{
 		init_data_struct(data, argc, argv);
 		if (check_values(data) != 0)
-			return (1);
+			return (ERROR);
 		if (create_forks(data) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		if (create_philos(data) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		if (pthread_mutex_init(&data->t_lock, NULL) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		if (pthread_mutex_init(&data->s_lock, NULL) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		if (pthread_mutex_init(&data->d_lock, NULL) != 0)
-			handle_problem(data);
-		return (0);
+			return (handle_problem(data));
+		return (OK);
 	}
-	return (1);
+	return (ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 18:09:57 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:35:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,24 @@
 
 int	feast(t_philo *philo, int time)
 {
-	pthread_mutex_lock(&philo->left->fork);
-	if (am_i_dead(philo, get_time(philo->data) == 0))
-		ft_printer(philo->data, time, philo->id, "has taken fork");
-	if (pthread_mutex_lock(&philo->right->fork) != 0)
-		pthread_mutex_unlock(&philo->left->fork);
-	time = get_time(philo->data);
-	if (someone_dead(philo) == 0 && am_i_dead(philo, time) == 0)
+	if (grab_forks(philo) != 0)
+		return (ERROR);
+	if (someone_dead(philo) == 0)
 	{
 		time = get_time(philo->data);
-		ft_printer(philo->data, time, philo->id, "has taken fork");
+		philo->last_meal = time;
 		ft_printer(philo->data, time, philo->id, "is eating");
-		if (am_i_dead(philo, get_time(philo->data)) == 0)
-		{
-			philo->times_to_eat -= 1;
-			philo->last_meal = time;
-			corrected_sleep (philo->time_to_eat, philo->data);
-			pthread_mutex_unlock(&philo->right->fork);
-			pthread_mutex_unlock(&philo->left->fork);
-			return (OK);
-		}
+		corrected_sleep(philo->time_to_eat, philo->data);
+		relase_forks(philo);
+		philo->times_to_eat -= 1;	
+		return (OK);
 	}
-	pthread_mutex_unlock(&philo->right->fork);
-	pthread_mutex_unlock(&philo->left->fork);
+	relase_forks(philo);
 	return (ERROR);
 }
 
 int	rest(t_philo *philo, int time)
 {
-	if (will_i_die_sleeping(philo, time) == 1)
-		return (ERROR);
 	ft_printer(philo->data, time, philo->id, "is sleeping");
 	corrected_sleep(philo->time_to_sleep, philo->data);
 	return (OK);

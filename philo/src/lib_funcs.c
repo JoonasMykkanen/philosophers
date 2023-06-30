@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:06:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 17:51:48 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:36:21 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	ft_atoi(const char *str)
 		i++;
 	if (str[i] == '-')
 	{
-		neg = -1;
-		i++;
+		return (-1);
 	}
 	else if (str[i] == '+')
 		i++;
@@ -58,6 +57,8 @@ int	ft_atoi(const char *str)
 		sum = sum * 10 + (str[i] - '0');
 		i++;
 	}
+	if (sum > INT_MAX)
+		return (-1);
 	return (sum * neg);
 }
 
@@ -91,23 +92,4 @@ void	*ft_calloc(size_t count, size_t size)
 		return (ptr);
 	}
 	return (NULL);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int				i;
-	unsigned char	*str1;
-	unsigned char	*str2;
-
-	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	while (n > 0 && str1[i] != '\0' && str1[i] == str2[i])
-	{
-		n--;
-		i++;
-	}
-	if (n == 0)
-		return (0);
-	return (str1[i] - str2[i]);
 }

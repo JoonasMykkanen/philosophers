@@ -6,16 +6,30 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 01:22:50 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 17:51:34 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:35:55 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	will_i_die_sleeping(t_philo *philo, int time)
+void	relase_forks(t_philo *philo)
 {
-	if ((time - philo->last_meal) + philo->time_to_sleep > philo->time_to_die)
-		return (death(philo));
+	pthread_mutex_unlock(&philo->right->fork);
+	pthread_mutex_unlock(&philo->left->fork);
+}
+
+int	grab_forks(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->right->fork);
+	if (am_i_dead(philo, get_time(philo->data)) == 0)
+		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken fork");
+	else
+		return (ERROR);
+	pthread_mutex_lock(&philo->left->fork);
+	if (am_i_dead(philo, get_time(philo->data)) == 0)
+		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken fork");
+	else
+		return (ERROR);
 	return (OK);
 }
 
