@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 01:22:50 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:35:55 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:42:16 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	grab_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->right->fork);
 	if (am_i_dead(philo, get_time(philo->data)) == 0)
-		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken fork");
+		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken a fork");
 	else
 		return (ERROR);
 	pthread_mutex_lock(&philo->left->fork);
 	if (am_i_dead(philo, get_time(philo->data)) == 0)
-		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken fork");
+		ft_printer(philo->data, get_time(philo->data), philo->id, "has taken a fork");
 	else
 		return (ERROR);
 	return (OK);
