@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:47:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 07:30:00 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	start(t_data *data)
 		return (handle_problem(data));
 	while (++id <= data->philo_count)
 	{
-		if (pthread_create(
-				&data->philos[id].thread, NULL, &routine, &data->philos[id]) != 0)
+		if (pthread_create(&data->philos[id].thread, NULL,
+				&routine, &data->philos[id]) != 0)
 			handle_problem(data);
 		data->thread_count++;
 		usleep(10);

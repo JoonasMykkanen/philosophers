@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:07:12 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 19:35:43 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 07:30:34 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	set_simulation_finished(t_data *data)
 	pthread_mutex_unlock(&data->s_lock);
 }
 
-static void	reset(int *idx, int *eaten, int	count)
+static void	reset(int *idx, int *eaten, int count)
 {
 	if (*idx >= count)
 	{

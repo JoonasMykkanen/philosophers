@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:51:07 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:35:46 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 07:31:21 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	feast(t_philo *philo, int time)
 		ft_printer(philo->data, time, philo->id, "is eating");
 		corrected_sleep(philo->time_to_eat, philo->data);
 		relase_forks(philo);
-		philo->times_to_eat -= 1;	
+		philo->times_to_eat -= 1;
 		return (OK);
 	}
 	relase_forks(philo);
