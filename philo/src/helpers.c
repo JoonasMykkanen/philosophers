@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 20:22:42 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:52:48 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ int	handle_problem(t_data *data)
 	idx = 0;
 	pthread_mutex_lock(&data->s_lock);
 	data->done = 1;
-	data->someone_dead = 1;
 	pthread_mutex_unlock(&data->s_lock);
+	pthread_mutex_lock(&data->d_lock);
+	data->someone_dead = 1;
+	pthread_mutex_unlock(&data->d_lock);
 	while (++idx <= data->thread_count)
-	{
-		if (pthread_join(data->philos[idx].thread, NULL) != 0)
-			handle_problem(data);
-	}
+		pthread_join(data->philos[idx].thread, NULL);
+	if (data->monitor_created == 1)
+		pthread_join(data->monitor, NULL);
 	clean_exit(data);
 	return (ERROR);
 }

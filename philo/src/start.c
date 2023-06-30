@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 19:33:37 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:47:38 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	start(t_data *data)
 
 	id = 0;
 	if (pthread_create(&data->monitor, NULL, &monitor, data) != 0)
-		handle_problem(data);
+		return (handle_problem(data));
 	while (++id <= data->philo_count)
 	{
 		if (pthread_create(
@@ -28,6 +28,6 @@ int	start(t_data *data)
 		usleep(10);
 	}
 	if (pthread_create(&data->clock, NULL, &internal_clock, data) != 0)
-		handle_problem(data);
+		return (handle_problem(data));
 	return (0);
 }

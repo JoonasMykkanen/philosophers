@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/29 20:24:11 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 06:53:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	create_forks(t_data *data)
 	{
 		data->forks[id].id = id;
 		if (pthread_mutex_init(&data->forks[id].fork, NULL) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		data->fork_count++;
 	}
 	return (0);
@@ -59,7 +59,7 @@ static int	create_philos(t_data *data)
 	{
 		init_philo_struct(data, &philo, id);
 		if (pthread_mutex_init(&data->philos[id].lock, NULL) != 0)
-			handle_problem(data);
+			return (handle_problem(data));
 		data->lock_count++;
 		if (id == 1)
 			data->philos[id].left = &data->forks[data->philo_count];
@@ -79,6 +79,7 @@ static void	init_data_struct(t_data *data, int argc, char **argv)
 	data->fork_count = 0;
 	data->someone_dead = 0;
 	data->thread_count = 0;
+	data->monitor_created = 0;
 	data->philo_count = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
