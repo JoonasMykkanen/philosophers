@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:06:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:36:21 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/30 07:27:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	ft_isnum(const char *str)
 	if (!str)
 		return (1);
 	idx = 0;
+	if (str[0] == '+')
+		idx++;
 	while (str[idx] != '\0')
 	{
 		if (str[idx] == 45 && idx == 0)
@@ -26,11 +28,11 @@ static int	ft_isnum(const char *str)
 		else if (str[idx] >= 48 && str[idx] <= 57)
 			idx++;
 		else
-			return (1);
+			return (ERROR);
 	}
 	if (idx == 0)
-		return (1);
-	return (0);
+		return (ERROR);
+	return (OK);
 }
 
 int	ft_atoi(const char *str)
