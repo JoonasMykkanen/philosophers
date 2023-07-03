@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: jmykkane <jmykkane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:14:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:50:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/07/03 09:48:47 by jmykkane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include <limits.h>
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>

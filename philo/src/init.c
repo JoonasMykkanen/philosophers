@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: jmykkane <jmykkane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:38:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:53:46 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/07/03 10:02:40 by jmykkane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	init(int argc, char **argv, t_data *data)
 	if (argc == 5 || argc == 6)
 	{
 		init_data_struct(data, argc, argv);
+		if (data->times_to_eat == 0)
+			return (ERROR);
 		if (check_values(data) != 0)
 			return (ERROR);
 		if (create_forks(data) != 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: jmykkane <jmykkane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:19:04 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/30 06:52:48 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/07/03 10:04:22 by jmykkane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static int	check_numbers(t_data *data)
 	if (data->time_to_sleep <= 0)
 		return (ERROR);
 	if (data->times_to_eat <= 0)
-		return (ERROR);
+		return (NO_SIM);
 	return (OK);
 }
 
 int	check_values(t_data *data)
 {
+	int	ret;
+	
 	if (data->philo_count <= 0)
 	{
 		printf("Error\n");
@@ -38,11 +40,14 @@ int	check_values(t_data *data)
 	{
 		return (NO_SIM);
 	}
-	if (check_numbers(data) != 0)
+	ret = check_numbers(data);
+	if (ret == 1)
 	{
 		printf("Error\n");
 		return (ERROR);
 	}
+	else if (ret == -1)
+		return (ERROR);
 	return (OK);
 }
 

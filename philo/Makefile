@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
+#    By: jmykkane <jmykkane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 11:21:33 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/06/29 17:58:54 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/07/03 09:50:38 by jmykkane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCLUDES = inc/philo.h
 
-FLAGS = -Wall -Werror -Wextra -I $(INCLUDES) -g
+FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 
 .PHONY: all
 all: $(NAME) 
@@ -57,12 +57,12 @@ re: fclean all
 
 .PHONY: address
 address: fclean $(OBJS)
-	cc $(FLAGS) -fsanitize=address $(OBJS) -o $(NAME)
+	cc $(FLAGS) -g -fsanitize=address $(OBJS) -o $(NAME)
 	./philo 4 500 200 100 10
 
 .PHONY: thread
 thread: fclean $(OBJS)
-	cc $(FLAGS) -fsanitize=thread $(OBJS) -o $(NAME)
+	cc $(FLAGS) -g -fsanitize=thread $(OBJS) -o $(NAME)
 	./philo 4 500 200 100 10
 
 .PHONY: leaks
